@@ -1,0 +1,45 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 16px;
+
+  thead {
+    th {
+      text-align: left;
+      border-bottom: 2px solid hsla(0,0%,87.1%,.28);
+      padding: 8px;
+      font-weight: 700;
+      color: #5f6d84;
+    }
+
+    th {
+      border: none !important;
+    }
+  }
+
+  tbody tr:nth-of-type(odd) {
+    background-color: #fcfcfc;
+  }
+
+  tbody {
+    tr {
+      border-top: 1px solid hsla(0,0%,87.1%,.28);
+      cursor: pointer;
+
+      td {
+        vertical-align: top;
+        padding: 8px;
+      }
+
+      th, td {
+        border: none !important;
+      }
+    }
+
+    td {
+      cursor: pointer;
+    }
+  }
+}

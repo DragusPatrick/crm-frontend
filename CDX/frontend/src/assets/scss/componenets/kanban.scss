@@ -1,0 +1,111 @@
+div#kanban {
+  .board {
+    display: block;
+    white-space: nowrap;
+    padding: 0;
+  }
+
+  .page-title-box {
+    box-shadow: 0 0px 0 0 rgba(154, 161, 171, 0.1) !important;
+    background-color: transparent !important;
+  }
+
+  .tasks.tasks:not(:last-child) {
+    margin-right: 1.25rem;
+  }
+
+  .tasks {
+    display: inline-block;
+    width: 24.5%;
+    padding: 0 1rem 1rem 1rem;
+    border: 1px solid #eef2f7;
+    box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+    vertical-align: top;
+    margin-bottom: 24px;
+    border-radius: .25rem;
+
+    .task-header {
+      background-color: #f1f3fa;
+      padding: 1rem;
+      margin: 0 -1rem;
+    }
+
+    .task-list-items {
+      min-height: 100px;
+      position: relative;
+    }
+
+    .task-list-items:before {
+      content: "No Tasks";
+      position: absolute;
+      line-height: 110px;
+      width: 100%;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .card {
+      white-space: normal;
+      margin-top: 1rem;
+      padding: 15px;
+    }
+  }
+
+  .btn-success {
+    -webkit-box-shadow: 0 2px 6px 0 rgba(10,207,151,.5);
+    box-shadow: 0 2px 6px 0 rgba(10,207,151,.5);
+  }
+
+  .ml-3, .mx-3 {
+    margin-left: 1.5rem!important;
+  }
+
+  .btn-group-sm>.btn, .btn-sm {
+    padding: .28rem .8rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .15rem;
+  }
+
+  .btn-success {
+    color: #fff;
+    background-color: #0acf97;
+    border-color: #0acf97;
+  }
+
+  .text-muted {
+    color: #98a6ad!important;
+  }
+
+  .float-right {
+    float: right!important;
+  }
+
+  .badge-danger {
+    color: #fff;
+    background-color: #fa5c7c;
+  }
+
+
+  h5.mt-2.mb-2 a {
+    color: #6c757d !important;
+    font-weight: 700;
+    font-size: 17px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+  }
+}

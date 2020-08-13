@@ -1,0 +1,37 @@
+.document {
+    border-radius: 3px;
+    background-color: #fff;
+    box-shadow: 0 10px 35px 0 rgba(154, 161, 171, 0.1) !important;
+
+    .card-box {
+        padding: 0 !important;
+    }
+
+    .inv-header {
+        background-color: #32343D;
+        padding: 45px 40px 25px 40px;
+
+        span {
+            font-size: 32px;
+            font-weight: 400;
+            color: #C7C8CC;
+            vertical-align: middle;
+            margin-top: auto;
+        }
+    }
+
+    .inv-subheader {
+        p.total_title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #7A797E;
+            border-bottom: 3px solid #C87D48;
+            padding-right: 40px;
+
+            span {
+                color: #0F0F11;
+                font-weight: 700;
+            }
+        }
+    }
+}

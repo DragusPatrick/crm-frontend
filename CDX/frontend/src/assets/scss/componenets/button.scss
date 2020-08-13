@@ -1,0 +1,65 @@
+.btn {
+    border: none;
+    border-radius: 2px !important;
+    font-size: 13px !important;
+    line-height: 16px !important;
+    padding: 6px 15px !important;
+    display: inline-block;
+    position: relative;
+    text-shadow: none;
+    cursor: pointer;
+    transition: background .2s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    i {
+        font-size: 11px !important;
+    }
+}
+
+.btn-sm {
+    padding: 4px 8px !important;
+    line-height: 12px !important;
+    font-size: 12px;
+}
+
+.btn-default {
+    color: #484746;
+    background: #ececec;
+    box-shadow: 0 1px #d3d3d3;
+}
+
+.btn-primary {
+    background: #3aa3e3 !important;
+    color: #fff;
+    box-shadow: 0 1px #1d8acd !important;
+    border: none !important;
+    font-size: 12px;
+
+    span {
+        font-size: 12px;
+    }
+}
+
+button.btn.btn-pink, a.btn.btn-pink, .btn.btn-pink{
+    color: #fff;
+    background-color: #fa5c7c;
+    border-color: #fa5c7c;
+    box-shadow: 0 2px 6px 0 rgba(250,92,124,.5);
+}
+
+button.btn-purple {
+    color: #fff;
+    background-color: #727cf5;
+    border-color: #727cf5;
+    box-shadow: 0 2px 6px 0 rgba(114,124,245,.5);
+}
+
+.btn-anim {
+    color: #fff !important;
+    background-color: #727cf5;
+    border-color: #727cf5;
+    box-shadow: 0 2px 6px 0 rgba(114,124,245,.5);
+}
