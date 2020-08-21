@@ -11197,11 +11197,11 @@ button.btn.btn-gray-light {
     top: 75%;
     left: 0;
     z-index: 1000;
-    padding: 10px 0;
+    padding: 25px 0;
     list-style: none;
     min-width: 200px;
     text-align: left;
-    opacity: 0;
+    opacity: 1;
     margin-top: 10px;
     border-radius: 4px;
     transition: all 0.2s ease;
@@ -12847,4 +12847,22 @@ button.btn.btn-gray-light {
     .bank-form form {
         display: block;
     }
+}
+
+.validation-text {
+		margin: 10px 0 25px 0;
+		color: #FF1D58;
+		font-weight: 500;
+		font-size: 15px;
+}
+
+.input-error-class {
+		margin-top: 5px;
+		color: #FF1D58;
+		font-size: 12px;
+		font-weight: 500;
+}
+
+.panel-extra .btn {
+    margin-left: 5px;
 }

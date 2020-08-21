@@ -16,7 +16,7 @@
             </thead>
             <tr slot-scope="{ item }" @click="detailsPage(item)">
                 <th class="hidden-xs">
-                    OT-{{ item.id }}
+                    {{ item.number }}
                 </th>
                 <td>{{ item.name }}</td>
                 <td>{{ item.cif }}</td>

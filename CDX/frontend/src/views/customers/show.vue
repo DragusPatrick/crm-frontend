@@ -5,7 +5,7 @@
                 <div class="panel-title">
                     <div>
                         <router-link to="/customers" class="router-link-active">Customer</router-link> / {{ customer.name }}
-                        <small>(CT-101611)</small>
+                        <small>({{ customer.number }})</small>
                     </div>
                 </div>
                 <div class="panel-extra">
@@ -13,10 +13,10 @@
                         <router-link to="/customers" class="btn btn-default btn-sm router-link-active">
                             <i class="fas fa-long-arrow-alt-left"></i>
                         </router-link>
-                        <a href="/vendors/1/edit" class="btn btn-default btn-sm">
+                        <router-link to="/" class="btn btn-default btn-sm">
                             <i class="fas fa-pencil-alt"></i>
-                        </a>
-                        <button @click="deleteItem(customer.id)" type="button" class="btn btn-error btn-sm">
+                        </router-link>
+                        <button @click="deleteCustomer(customer.id)" type="button" class="btn btn-error btn-sm">
                             <i class="far fa-trash-alt"></i>
                         </button>
                     </div>
@@ -242,8 +242,8 @@
 	                        </tr>
                         </thead>
 												<tbody>
-														<tr v-for="project in customerProjects">
-																<th class="" style="text-align: left;">PM-{{ project.id }}</th>
+														<tr v-for="project in customerProjects" @click="projectDetailsPage(project)">
+																<th class="" style="text-align: left;">{{ project.number }}</th>
 																<td class="" style="text-align: left;">{{ project.start_date | formatDate }}</td>
 																<td class="" style="text-align: left;">{{ project.due_date | formatDate }}</td>
 																<td class="" style="text-align: left;">{{ project.status }}</td>
@@ -298,7 +298,7 @@
 
 <script type="text/javascript">
     import Vue from 'vue'
-    import {get, byMethod} from '../../lib/api'
+    import { get, byMethod } from '../../lib/api'
     import axios from 'axios';
 
     export default {
@@ -310,7 +310,7 @@
             }
         },
         methods: {
-					  loadCustomerProjects() {
+					  loadCustomerProjects(project) {
                 axios.get('http://127.0.0.1:8000/api/customer/1/projects').then(({ data }) => (this.customerProjects = data.collection));
             },
 						loadCustomerPayments() {
@@ -325,13 +325,32 @@
 	                  this.errors.push(e)
 	              });
             },
-            deleteItem(id) {
-                // Send request to the server
-                this.form.delete('http://127.0.0.1:8000/api/customers/'+id).then(() => {
-                }).catch(() => {
-
-                });
+						projectDetailsPage(project) {
+                this.$router.push('/project/' + project.id)
             },
+						deleteCustomer(id) {
+			        swal({
+			            title: 'Are you sure?',
+			            text: "You won't be able to revert this!",
+			            type: 'warning',
+			            showCancelButton: true,
+			            confirmButtonColor: '#3085d6',
+			            cancelButtonColor: '#d33',
+			            confirmButtonText: 'Yes, delete it!'
+			          }).then((result) => {
+
+			            // Send request to the server
+			            this.form.delete('http://127.0.0.1:8000/api/customers/'+id).then(() => {
+			              swal(
+			                'Deleted!',
+			                'Your customer has been deleted.',
+			                'success'
+			              );
+			            }).catch(() => {
+			              swal('Failed!', 'There was someting wrong!', 'Warning!');
+			            });
+			          })
+			      },
         },
         created() {
           	this.loadCustomer();

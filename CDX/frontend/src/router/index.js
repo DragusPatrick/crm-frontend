@@ -62,6 +62,16 @@ const routes = [
 		component: () => import(/* webpackChunkName: "projects" */ '../views/projects/index.vue')
 	},
 	{
+		path: '/project/:id',
+		name: 'Projects',
+		meta: {
+			auth: true,
+			title: 'Projects',
+			href: 'projects'
+		},
+		component: () => import(/* webpackChunkName: "projects" */ '../views/projects/show.vue')
+	},
+	{
 		path: '/quotes',
 		name: 'Quotes',
 		meta: {
@@ -108,6 +118,16 @@ const routes = [
 			href: 'customers'
 		},
 		component: () => import(/* webpackChunkName: "projects" */ '../views/customers/show.vue')
+	},
+	{
+		path: '/payments',
+		name: 'Payments',
+		meta: {
+			auth: true,
+			title: 'Payments',
+			href: 'payments'
+		},
+		component: () => import(/* webpackChunkName: "projects" */ '../views/payments/index.vue')
 	},
   {
     path: '/login',

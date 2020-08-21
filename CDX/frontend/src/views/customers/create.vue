@@ -1,8 +1,14 @@
 <template>
     <div class="card-box page-content">
         <div class="">
-            <form class="form" @submit.prevent="createCustomer()">
+            <form class="form" @submit.prevent="createCustomer()" @keydown="form.onKeydown($event)">
                 <div class="">
+
+										<!-- Alert -->
+							      <div v-if="form.errors.any()" class="validation-text">
+							        There were some problems with your input.
+							      </div>
+
                     <div>
                         <div class="row row-line">
                             <div class="col-md-4">
@@ -17,11 +23,15 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="form-label">
+                                    <label class="form-label" :class="{ 'is-invalid': form.errors.has('cif') }" >
                                         <span>CUI / CIF</span>
                                         <!---->
                                     </label>
                                     <input v-model="form.cif" type="text" class="form-input" name="cif" placeholder="Enter customer CIF or CUI">
+
+																		<div v-if="form.errors.has('cif')" class="input-error-class">
+														          {{ form.errors.get('cif') }}
+														        </div>
                                 </div>
                             </div>
 
@@ -197,6 +207,8 @@
                     phone:          '',
                     website:        '',
                 }),
+								allerros: [],
+           			success : false,
             }
         },
         methods: {
@@ -210,9 +222,11 @@
             createCustomer() {
                 this.form.post('http://127.0.0.1:8000/api/customers/')
                     .then(function (response) {
-                        this.$router.push('/customers')
-                    })
-                this.$router.push('/customers')
+												this.$router.push('/');
+                    }).catch((error) => {
+                        this.allerros = error.response.data.errors;
+                        this.success = false;
+                   });
             },
             loadContacts() {
                 axios.get('http://127.0.0.1:8000/api/contacts/').then(({ data }) => (this.contacts = data.collection));

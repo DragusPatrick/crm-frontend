@@ -104,14 +104,15 @@
                         </div>
                     </li>
 
-                    <li class="dropdown notification-list">
-                        <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="https://coderthemes.com/greeva/layouts/vertical/assets/images/users/avatar-4.jpg" alt="user" class="rounded-circle">
-                            <span class="ml-1">Dragus P. <i class="mdi mdi-chevron-down"></i>
-                      </span>
+                    <li class="dropdown show notification-list">
+                        <a class="nav-link nav-user dropdown-toggle" href="#" role="button" id="dropdownMenus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="https://coderthemes.com/greeva/layouts/horizontal/assets/images/users/avatar-4.jpg" alt="user" class="rounded-circle">
+                            <span class="ml-1">
+															Dragus P. <i class="mdi mdi-chevron-down"></i>
+                      			</span>
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-34px, 70px, 0px);">
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown" aria-labelledby="dropdownMenus">
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h6 class="text-overflow m-0">Welcome !</h6>
@@ -204,25 +205,18 @@
                             </router-link>
                         </li>
 
-                        <li class="has-submenu">
-                            <router-link to="/invoices" @mouseover="hover = true"
-                                         @mouseleave="hover = false">
+                        <li class="has-submenu" @mouseover="showByIndex = i" @mouseout="showByIndex = null">
+                            <a>
                                 <i class="fas fa-hand-holding-usd"></i>
                                 Financial
-                            </router-link>
+                            </a>
 
-                            <ul class="submenu" v-if="hover" :class="{ active: hover }">
+                            <ul class="submenu" v-show="showByIndex === i">
                                 <li>
-                                    <a href="layouts-topbar-light.html">Topbar Light</a>
+                                    <router-link to="/invoices">Issued Invoices</router-link>
                                 </li>
                                 <li>
-                                    <a href="layouts-center-menu.html">Center Menu</a>
-                                </li>
-                                <li>
-                                    <a href="layouts-normal-header.html">Unsticky Header</a>
-                                </li>
-                                <li>
-                                    <a href="layouts-boxed.html">Boxed</a>
+                                    <router-link to="/invoices">Received Invoices</router-link>
                                 </li>
                             </ul>
                         </li>
@@ -260,13 +254,13 @@
     export default {
         data() {
             return {
-                hover: false,
+                showByIndex: null
             }
         },
         methods: {
             iconClass() {
                 return this.showMenu ? 'icon-close' : 'icon-menu';
-            }
+            },
         }
     }
 </script>

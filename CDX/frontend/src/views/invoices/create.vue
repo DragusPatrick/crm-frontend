@@ -5,13 +5,28 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-12">
+								<div class="col-6">
+										<div class="form-group">
+												<label class="form-label">Customer</label>
+												<typeahead :url="customerURL" :initialize="form.customer"
+																	 @input="onCustomer" />
+												<small class="error-control" v-if="errors.customer_id">
+														{{ errors.customer_id[0] }}
+												</small>
+										</div>
+								</div>
+								<div class="col-6">
                     <div class="form-group">
-                        <label class="form-label">Customer</label>
-                        <typeahead :url="customerURL" :initialize="form.customer"
-                                   @input="onCustomer" />
-                        <small class="error-control" v-if="errors.customer_id">
-                            {{ errors.customer_id[0] }}
+                        <label  class="form-label">
+                            Currency
+                        </label>
+												<select v-model="form.currency" class="form-control select-input">
+												  <option value="" disabled>Select ..</option>
+										      <option value="RON" selected>RON</option>
+										      <option value="EURO">EUR</option>
+										    </select>
+												<small class="error-control" v-if="errors.currency">
+                            {{errors.currency[0]}}
                         </small>
                     </div>
                 </div>
@@ -61,43 +76,43 @@
             <hr>
             <table class="form-table">
                 <thead>
-                <tr>
-                    <th>Item Description</th>
-                    <th>Unit Price</th>
-                    <th>Qty</th>
-                    <th>Total</th>
-                </tr>
+	                <tr>
+	                    <th>Item Description</th>
+	                    <th>Unit Price</th>
+	                    <th>Qty</th>
+	                    <th>Total</th>
+	                </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(item, index) in form.items">
-                    <td class="w-14">
-                        <typeahead :url="productURL" :initialize="item.product"
-                                   @input="onProduct(index, $event)" />
-                        <small class="error-control" v-if="errors[`items.${index}.product_id`]">
-                            {{errors[`items.${index}.product_id`][0]}}
-                        </small>
-                    </td>
-                    <td class="w-4">
-                        <input type="text" class="form-input" v-model="item.unit_price">
-                        <small class="error-control" v-if="errors[`items.${index}.unit_price`]">
-                            {{errors[`items.${index}.unit_price`][0]}}
-                        </small>
-                    </td>
-                    <td class="w-2">
-                        <input type="text" class="form-input" v-model="item.qty">
-                        <small class="error-control" v-if="errors[`items.${index}.qty`]">
-                            {{errors[`items.${index}.qty`][0]}}
-                        </small>
-                    </td>
-                    <td class="w-4">
-                            <span class="form-input">
-                                {{Number(item.qty) * Number(item.unit_price) | formatMoney}}
-                            </span>
-                    </td>
-                    <td>
-                        <span class="form-remove" @click="removeItem(index)">&times;</span>
-                    </td>
-                </tr>
+	                <tr v-for="(item, index) in form.items">
+	                    <td class="w-14">
+	                        <typeahead :url="productURL" :initialize="item.product"
+	                                   @input="onProduct(index, $event)" />
+	                        <small class="error-control" v-if="errors[`items.${index}.product_id`]">
+	                            {{errors[`items.${index}.product_id`][0]}}
+	                        </small>
+	                    </td>
+	                    <td class="w-4">
+	                        <input type="text" class="form-input" v-model="item.unit_price">
+	                        <small class="error-control" v-if="errors[`items.${index}.unit_price`]">
+	                            {{errors[`items.${index}.unit_price`][0]}}
+	                        </small>
+	                    </td>
+	                    <td class="w-2">
+	                        <input type="text" class="form-input" v-model="item.qty">
+	                        <small class="error-control" v-if="errors[`items.${index}.qty`]">
+	                            {{errors[`items.${index}.qty`][0]}}
+	                        </small>
+	                    </td>
+	                    <td class="w-4">
+	                            <span class="form-input">
+	                                {{Number(item.qty) * Number(item.unit_price) | formatMoney}}
+	                            </span>
+	                    </td>
+	                    <td>
+	                        <span class="form-remove" @click="removeItem(index)">&times;</span>
+	                    </td>
+	                </tr>
                 </tbody>
                 <tfoot>
                 <tr>

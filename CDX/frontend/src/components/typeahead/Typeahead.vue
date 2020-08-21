@@ -18,12 +18,12 @@
                                @keydown.down="onDownKey"
                                @keydown.enter="onEnterKey">
                     </div>
-                    <ul class="typeahead-list" v-if="results.length">
+                    <ul class="typeahead-list" v-if="results && results.length > 1">
                         <li class="typeahead-item" v-for="(result, index) in results" :key="result.id">
                             <a :class="['typeahead-link', selectIndex === index ? 'typeahead-active':'']"
                                @mousedown.prevent="select(result)"
                                @mouseover.prevent="onMouse(index)">
-                                {{ result.text }} {{ result.name }}
+                                1
                             </a>
                         </li>
                     </ul>

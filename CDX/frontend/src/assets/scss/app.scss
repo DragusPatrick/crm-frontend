@@ -988,5 +988,19 @@ div#todayTasks {
       /* font-size: .9375rem; */
     }
   }
+}
 
+.validation-text {
+		margin: 10px 0 25px 0;
+		color: #FF1D58;
+		font-weight: 500;
+		font-size: 15px;
+}
+
+label.form-label.is-invalid span {
+    color: #FF1D58;
+}
+
+.panel-extra .btn {
+    margin-left: 5px;
 }
