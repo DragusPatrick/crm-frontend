@@ -241,7 +241,6 @@
 </template>
 
 <script type="text/javascript">
-
     import Vue from 'vue'
     import axios from 'axios'
     export default {

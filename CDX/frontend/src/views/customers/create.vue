@@ -3,7 +3,6 @@
         <div class="">
             <form class="form" @submit.prevent="createCustomer()" @keydown="form.onKeydown($event)">
                 <div class="">
-
 										<!-- Alert -->
 							      <div v-if="form.errors.any()" class="validation-text">
 							        There were some problems with your input.

@@ -3105,3 +3105,7 @@ div#todayTasks label.custom-control-label a {
   font-weight: 600;
   /* font-size: .9375rem; */
 }
+
+.modal-footer .btn {
+	margin-left: 5px;
+}
