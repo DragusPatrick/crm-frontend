@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Project;
+use App\Models\Payment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +15,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
-
-				$model = Project::orderBy('id', 'DESC')->paginate(50);
+				$results = Payment::with('customer')
+										->advancedFilter();
 
 				return response()
-						->json([
-								'collection' => $model,
-						]);
+						->json(['collection' => $results]);
     }
 
     /**
@@ -43,12 +41,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-				$project = Project::findOrFail($id);
-
-				return response()
-						->json([
-								'project' => $project,
-						]);
+        //
     }
 
     /**

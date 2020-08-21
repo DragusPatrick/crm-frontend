@@ -50,6 +50,8 @@ Route::apiResources(['products' => 'API\ProductController']);
 Route::resource('/invoices', 'API\InvoiceController');
 Route::apiResources(['projects' => 'API\ProjectController']);
 Route::apiResources(['quotes' => 'API\QuoteController']);
+Route::apiResources(['payments' => 'API\PaymentController']);
 
 Route::get('/products', 'ProductController@search');
 Route::get('/customer/{id}/projects', 'API\CustomerController@getCustomerProjects');
+Route::get('/customer/{id}/payments', 'API\CustomerController@getCustomerPayments');

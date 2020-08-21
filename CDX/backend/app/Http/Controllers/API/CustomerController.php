@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use DB;
 use App\Models\Customer;
 use App\Models\Project;
+use App\Models\Counter;
+use App\Models\Payment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -16,7 +19,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-				$results = Customer::advancedFilter();
+				$results = Customer::with('contact')->advancedFilter();
 
 				return response()
 						->json(['collection' => $results]);
@@ -30,6 +33,14 @@ class CustomerController extends Controller
 						->json(['collection' => $results]);
 		}
 
+		public function getCustomerPayments(Request $request, $id)
+		{
+				$results = Payment::where('customer_id', $id)->orderBy('id', 'DESC')->get();
+
+				return response()
+						->json(['collection' => $results]);
+		}
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,21 +49,37 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-				return Customer::create([
-						'cif'           => $request['cif'],
-						'name'          => $request['name'],
-						'reg_com'       => $request['reg_com'],
-						'client_code'   => $request['client_code'],
-						'address'       => $request['address'],
-						'country'       => $request['country'],
-						'city'          => $request['city'],
-						'bank'          => $request['bank'],
-						'iban'          => $request['iban'],
-						'email'         => $request['email'],
-						'contact_id'    => $request['contact_id'],
-						'phone'         => $request['phone'],
-						'website'       => $request['website'],
+
+				$request->validate([
+					 'cif'			  => 'required',
+					 'name' 			=> 'required',
+					 'reg_com' 		=> 'required',
+					 'address' 		=> 'required',
+					 'country' 		=> 'required',
+					 'city' 			=> 'required',
+					 'iban' 			=> 'required',
+					 'bank' 			=> 'required',
+					 'email' 			=> 'required',
+					 'contact_id' => 'required',
+					 'phone' 			=> 'required',
+					 'website'	  => 'required',
 				]);
+
+				$customer = new Customer;
+				$customer->fill($request->all());
+
+				$customer = DB::transaction(function() use ($customer, $request) {
+						$counter = Counter::where('key', 'customer')->first();
+
+						$customer->number = $counter->prefix . $counter->value;
+
+						$counter->increment('value');
+
+						return $customer;
+				});
+				$customer->save();
+
+				return response()->json($customer, 201);
     }
 
     /**
@@ -91,6 +118,10 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+				$customer = Customer::findOrFail($id);
+
+				// Delete the article
+				$customer->delete();
+				return ['message' => 'Deleted'];
     }
 }
