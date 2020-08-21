@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use DB;
+use PDF;
+use Storage;
 use App\Models\Counter;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
@@ -80,10 +82,18 @@ class InvoiceController extends Controller
 						return $invoice;
 				});
 
-				// Data for email markdown
-				$data = array(
-						'number' => $invoice->number
-				);
+				PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadView('components.invoice', ['data' => $invoice]);
+
+        $content = $pdf->download()->getOriginalContent();
+
+        // Generate pdf file named from input text
+        Storage::put('public/Invoices/' . $invoice->number . '.pdf', $content);
+
+        // Data for email markdown
+        $data = array(
+            'number' => $invoice->number
+        );
 
 				return response()
 						->json(
